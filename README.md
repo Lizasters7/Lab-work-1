@@ -1,0 +1,1 @@
+Lab work 1, variant 1
