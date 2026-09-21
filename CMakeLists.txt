@@ -14,3 +14,10 @@ else()
     add_compile_options(-std=c++20)
     add_compile_options(-fexceptions)
 endif()
+
+add_executable(Lab-work-1
+    point.cpp
+    main.cpp 
+)
+
+target_include_directories(Lab-work-1 PRIVATE include)
