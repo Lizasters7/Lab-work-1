@@ -17,6 +17,7 @@ endif()
 
 add_executable(Lab-work-1
     point.cpp
+    pointSequenceGenerator.cpp
     main.cpp 
 )
 
