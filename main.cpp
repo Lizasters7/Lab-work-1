@@ -2,8 +2,9 @@
 #include <random>
 #include <stdexcept>
 #include <vector>
- #include "point.h"
+#include "point.h"
 #include "pointSequenceGenerator.h"
+#include "fileHandler.h"
  
 int main() {
     int failed = 0;
