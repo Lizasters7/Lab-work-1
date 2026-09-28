@@ -3,34 +3,30 @@
 #include <sstream>
 #include <stdexcept>
 
-namespace {
+bool isBlank(const std::string& s) {
+    return s.find_first_not_of(" \t\r\n") == std::string::npos;
+}
 
-    bool isBlank(const std::string& s) {
-        return s.find_first_not_of(" \t\r\n") == std::string::npos;
-    }
-
-    bool nextLine(std::istream& in, std::string& line, int& lineNum) {
-        while (std::getline(in, line)) {
-            lineNum++;
-            if (!isBlank(line)) {
-                return true;
-            }
+bool nextLine(std::istream& in, std::string& line, int& lineNum) {
+    while (std::getline(in, line)) {
+        lineNum++;
+        if (!isBlank(line)) {
+            return true;
         }
-        return false;
     }
+    return false;
+}
 
-    Point parsePoint(const std::string& line, int lineNum) {
-        std::istringstream iss(line);
-        Point p;
-        std::string extra;
+Point parsePoint(const std::string& line, int lineNum) {
+    std::istringstream iss(line);
+    Point p;
+    std::string extra;
 
-        if (!(iss >> p) || (iss >> extra)) {
-            throw std::runtime_error("Line " + std::to_string(lineNum) +
-                ": expected exactly two coordinates (x y)");
-        }
-        return p;
+    if (!(iss >> p) || (iss >> extra)) {
+        throw std::runtime_error("Line " + std::to_string(lineNum) +
+            ": expected exactly two coordinates (x y)");
     }
-
+    return p;
 }
 
 InputData readInputFile(const std::string& filename) {
