@@ -1,3 +1,6 @@
+// Compiler: MSVC (Microsoft Visual Studio 2022), Standard: C++23
+
+#include <functional>
 #include <iostream>
 #include <random>
 #include <stdexcept>
@@ -6,7 +9,6 @@
 #include "point.h"
 #include "pointSequenceGenerator.h"
 #include "fileHandler.h"
- 
 
 int runTests() {
     int failed = 0;
@@ -20,11 +22,14 @@ int runTests() {
     Point a{ 1.0, 2.0 };
     Point b{ 1.0, 2.0 };
     Point c{ 2.0, 0.0 };
-    if (!(a == b)) {
+    std::equal_to<Point> isEqual;
+    std::less<Point> isLess;
+
+    if (!isEqual(a, b)) {
         std::cout << "ERROR: equal points should compare equal (a == b)\n";
         ++failed;
     }
-    if (!(a < c)) {
+    if (!isLess(a, c)) {
         std::cout << "ERROR: (1,2) should be less than (2,0)\n";
         ++failed;
     }
@@ -103,4 +108,3 @@ int main() {
 
     return 0;
 }
- 
