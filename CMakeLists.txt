@@ -16,11 +16,9 @@ endif()
 add_executable(Lab-work-1
     main.cpp
     point.cpp
-    point.h
     pointSequenceGenerator.cpp
-    pointSequenceGenerator.h
     fileHandler.cpp
-    fileHandler.h
+    tests.cpp
 )
 
 target_include_directories(Lab-work-1 PRIVATE include)
