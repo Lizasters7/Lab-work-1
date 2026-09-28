@@ -1,10 +1,15 @@
 #include "fileHandler.h"
+#include <algorithm>
+#include <cctype>
+#include <cmath>
 #include <fstream>
 #include <sstream>
 #include <stdexcept>
 
 bool isBlank(const std::string& s) {
-    return s.find_first_not_of(" \t\r\n") == std::string::npos;
+    return std::all_of(s.begin(), s.end(), [](unsigned char c) {
+        return std::isspace(c);
+        });
 }
 
 bool nextLine(std::istream& in, std::string& line, int& lineNum) {
@@ -22,9 +27,9 @@ Point parsePoint(const std::string& line, int lineNum) {
     Point p;
     std::string extra;
 
-    if (!(iss >> p) || (iss >> extra)) {
+    if (!(iss >> p) || (iss >> extra) || !std::isfinite(p.x) || !std::isfinite(p.y)) {
         throw std::runtime_error("Line " + std::to_string(lineNum) +
-            ": expected exactly two coordinates (x y)");
+            ": expected exactly two finite coordinates (x y)");
     }
     return p;
 }
